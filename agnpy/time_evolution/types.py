@@ -23,6 +23,11 @@ class TimeEvaluationResult(NamedTuple):
     rel_inj_rates: dict[str, Quantity]
     abs_inj_rates: dict[str, Quantity]
 
+class DistributionToSinglePointCollapseError(Exception):
+    def __init__(self, gamma_point):
+        self.gamma_point = gamma_point
+        super().__init__(f"Unsupported state, cannot create InterpolatedDistribution - distribution collapsed to a single gamma point {gamma_point}")
+
 GammaFn = Callable[[FnParams], Quantity]
 """ 
 An abstract function that, for given gamma values provided in FnParams (and optionally densities), calculates a new
