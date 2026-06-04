@@ -1,7 +1,6 @@
 import numpy as np
 from astropy.units import Quantity, Unit
 from numpy._typing import NDArray
-from pygments.styles import vs
 from astropy.constants import m_e, c, h, e
 from agnpy import InterpolatedDistribution, EmptyDistribution
 from agnpy.time_evolution.types import BinsWithDensities, FnParams, TimeEvaluationResult, GammaFn, SubgroupsList
