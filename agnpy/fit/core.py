@@ -1,7 +1,5 @@
 # functions / classes shared by all wrapper types
 import numpy as np
-from sherpa.models import model
-from gammapy import modeling
 from ..spectra import InterpolatedDistribution
 
 
@@ -25,6 +23,8 @@ class Parameter:
         modelname : str
             The name of the model component containing the parameter.
         """
+        from sherpa.models import model # lazy loaded import - don't move it to the top of the file!
+
         # sherpa has a hard_max set to
         hard_max = 3.40282e38
         if self.max > hard_max:
@@ -42,6 +42,8 @@ class Parameter:
 
     def to_gammapy_parameter(self):
         """Return a `~gammapy.modeling.parameter."""
+        from gammapy import modeling # lazy loaded import - don't move it to the top of the file!
+
         return modeling.Parameter(
             name=self.name,
             value=self.value,

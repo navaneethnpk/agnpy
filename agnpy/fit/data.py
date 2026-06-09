@@ -1,9 +1,5 @@
 import numpy as np
-import astropy.units as u
 from astropy.table import Table
-from sherpa.data import Data1D
-from gammapy.estimators import FluxPoints
-from gammapy.datasets import FluxPointsDataset, Datasets
 
 
 def load_sherpa_flux_points(sed_path, E_min, E_max, systematics_dict=None):
@@ -30,6 +26,8 @@ def load_sherpa_flux_points(sed_path, E_min, E_max, systematics_dict=None):
     -------
     `~sherpa.data.Data1D`
     """
+    from sherpa.data import Data1D # lazy loaded import - don't move it to the top of the file!
+
     table = Table.read(sed_path)
     table = table.group_by("instrument")
 
@@ -111,6 +109,9 @@ def load_gammapy_flux_points(sed_path, E_min, E_max, systematics_dict=None):
     -------
     `~gammapy.dataset.Datasets`, list of flux points datasets
     """
+    from gammapy.estimators import FluxPoints # lazy loaded imports - don't move them to the top of the file!
+    from gammapy.datasets import FluxPointsDataset, Datasets
+
     datasets = Datasets()
 
     table = Table.read(sed_path)

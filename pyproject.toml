@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agnpy"
-version = "0.5.0"
+version = "0.5.1"
 description = "Modelling jetted Active Galactic Nuclei radiative processes with python"
 readme = { file = "README.md", content-type = "text/markdown" }
 authors = [
@@ -26,10 +26,13 @@ dependencies = [
     "scipy>=1.14",
     "pyyaml>=6.0", # needed to read astropy ecsv file
     "matplotlib>=3.9.1",
-    "sherpa",
     "pre-commit",
-    "gammapy>=1.3",
 ]
+
+[project.optional-dependencies]
+gammapy = ["gammapy>=1.3"]
+sherpa = ["sherpa"]
+all = ["agnpy[gammapy]", "agnpy[sherpa]"]
 
 [project.urls]
 Homepage = "https://github.com/cosimoNigro/agnpy"

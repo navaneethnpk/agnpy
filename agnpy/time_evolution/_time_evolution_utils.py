@@ -1,21 +1,14 @@
 import numpy as np
 from astropy.units import Quantity, Unit
 from numpy._typing import NDArray
-from pygments.styles import vs
 from astropy.constants import m_e, c, h, e
 from agnpy import InterpolatedDistribution, EmptyDistribution
-from agnpy.time_evolution.types import BinsWithDensities, FnParams, TimeEvaluationResult, GammaFn, SubgroupsList
+from agnpy.time_evolution.types import BinsWithDensities, FnParams, TimeEvaluationResult, GammaFn, SubgroupsList, DistributionToSinglePointCollapseError
 from agnpy.utils.conversion import mec2
 from scipy.interpolate import PchipInterpolator
 from typing import Tuple
 
 bin_size_factor = 1e-4
-
-class DistributionToSinglePointCollapseError(Exception):
-    def __init__(self, gamma_point):
-        self.gamma_point = gamma_point
-        super().__init__(f"Unsupported state, cannot create InterpolatedDistribution - distribution collapsed to a single gamma point {gamma_point}")
-
 
 def update_bin_ub(gm_bins, mask = None):
     """ Update bin upper bounds, but only for bins indicated by the mask
